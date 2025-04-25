@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:44:54 by czghoumi          #+#    #+#             */
-/*   Updated: 2025/04/24 18:07:28 by mac              ###   ########.fr       */
+/*   Updated: 2025/04/25 16:07:12 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,11 @@ void	on_scroll(double xdelta, double ydelta, void *param)
 	
 	f = (t_fractalp *)param;
 	mlx_get_mouse_pos(f->window, &f->x_pos, &f->y_pos);
+	// double a = (double)f->x_pos / WIDTH;
+    // double b = (double)f->y_pos / HEIGHT;
 	(void)xdelta;
+	// double x_in = f->zoom_xmax - a;
+	// double y_in = f->zoom_ymax - b;
 	
 	if (ydelta > 0)
 	{

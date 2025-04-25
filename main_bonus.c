@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:44:57 by czghoumi          #+#    #+#             */
-/*   Updated: 2025/04/24 18:09:39 by mac              ###   ########.fr       */
+/*   Updated: 2025/04/25 18:31:08 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ void	creat_phoenix(double cr, double ci, double pr, double pi)
 	}
 	mlx_image_to_window(window, image, 0, 0);
 	fractal.zoom_xmax = 1.0;
-	fractal.zoom_xmin = fractal.zoom_ymax = fractal.zoom_ymin = fractal.zoom_xmax;
+	fractal.zoom_xmin = 1.0; 
+	fractal.zoom_ymax = 1.0;
+	fractal.zoom_ymin = 1.0;
 	fractal.window = window;
 	fractal.image = image;
 	fractal.cr = cr;

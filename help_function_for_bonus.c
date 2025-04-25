@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:44:54 by czghoumi          #+#    #+#             */
-/*   Updated: 2025/04/24 18:34:08 by mac              ###   ########.fr       */
+/*   Updated: 2025/04/25 19:13:15 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,46 @@ void on_key_press(struct mlx_key_data key_data, void *param)
     t_fractalp *f;
 
     f = (t_fractalp *)param;
-    printf("Key pressed: %d, Current color i: %d\n", key_data.key, f->col->i);
     if (key_data.key == MLX_KEY_ESCAPE) 
         mlx_close_window(f->window);
-    
     if (key_data.key == 49) 
     {
 		if (f->col->i < 20) 
 		{
         	f->col->i++;
 		}
-        printf("Increased i to: %d\n", f->col->i);
         phoenix(f);
     }
     if (key_data.key == 50)
 	{
         if (f->col->i > 1) 
             f->col->i--;
-        printf("Decreased i to: %d\n", f->col->i);
         phoenix(f);
     }
+	if(key_data.key == MLX_KEY_UP)
+	{
+		f->zoom_ymin -= 0.05 * -2;
+		f->zoom_ymax -= 0.05 * 2;
+		phoenix(f);
+	}
+	if(key_data.key ==  MLX_KEY_DOWN)
+	{
+		f->zoom_ymin += 0.05 * -2;
+		f->zoom_ymax += 0.05 * 2;
+		phoenix(f);
+	}
+	if(key_data.key == MLX_KEY_LEFT)
+	{
+		f->zoom_xmin -= 0.05 * -2;
+		f->zoom_xmax -= 0.05 * 2;
+		phoenix(f);
+	}
+	if(key_data.key ==  MLX_KEY_RIGHT)
+	{
+		f->zoom_xmin += 0.05 * -2;
+		f->zoom_xmax += 0.05 * 2;
+		phoenix(f);
+	}
 }
 
 double	map(t_map a, int value)
