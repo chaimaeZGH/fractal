@@ -1,20 +1,18 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -framework Cocoa -framework OpenGL -framework IOKit
-GLFW_PATH = $(shell brew --prefix glfw)
-MLX = MLX42/build/libmlx42.a -Iinclude -L$/Users/mac/.brew/opt/glfw/lib -lglfw
-SRCS = main.c mandelbrot.c julia.c help_function.c
+MLX = MLX42/build/libmlx42.a -Iinclude -lglfw -L"/Users/czghoumi/.brew/Cellar/glfw/3.4/lib/"
+SRCS = mand/main.c mand/mandelbrot.c mand/julia.c mand/help_function.c
 OBJS = $(SRCS:.c=.o)
 
-SRCS_B = main_bonus.c help_functin_bonus.c help_function_for_bonus.c
+SRCS_B = bonus/main_bonus.c bonus/help_functin_bonus.c bonus/help_function_for_bonus.c
 OBJS_B = $(SRCS_B:.c=.o)
 
-
+HEADER = mand/fractol.h
 NAME = fractol
-HEADER = fractol.h
 
 NAME_B = fractol_bonus
-HEADER_B = fractol_bonus.h 
+HEADER_B = bonus/fractol_bonus.h
 
 all: $(NAME)
 
