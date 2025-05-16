@@ -6,64 +6,11 @@
 /*   By: czghoumi <czghoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:44:54 by czghoumi          #+#    #+#             */
-/*   Updated: 2025/05/05 19:28:40 by czghoumi         ###   ########.fr       */
+/*   Updated: 2025/05/09 12:30:22 by czghoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_bonus.h"
-
-void	on_key_press(struct mlx_key_data key_data, void *param)
-{
-	t_fractalp	*f;
-
-	f = (t_fractalp *)param;
-	if (key_data.key == MLX_KEY_ESCAPE)
-		mlx_close_window(f->window);
-	if (key_data.key == 49) 
-	{
-		if (f->col->i < 20)
-		{
-			f->col->i++;
-		}
-		phoenix(f);
-	}
-	if (key_data.key == 50)
-	{
-		if (f->col->i > 1)
-			f->col->i--;
-		phoenix(f);
-	}
-	if (key_data.key == MLX_KEY_UP)
-	{
-		f->zoom_ymin -= 0.02 * -2;
-		f->zoom_ymax -= 0.02 * 2;
-		phoenix(f);
-	}
-	if (key_data.key == MLX_KEY_DOWN)
-	{
-		f->zoom_ymin += 0.02 * -2;
-		f->zoom_ymax += 0.02 * 2;
-		phoenix(f);
-	}
-	if (key_data.key == MLX_KEY_LEFT)
-	{
-		f->zoom_xmin -= 0.02 * -2;
-		f->zoom_xmax -= 0.02 * 2;
-		phoenix(f);
-	}
-	if (key_data.key == MLX_KEY_RIGHT)
-	{
-		f->zoom_xmin += 0.02 * -2;
-		f->zoom_xmax += 0.02 * 2;
-		phoenix(f);
-	}
-}
-
-double	map(t_map a, int value)
-{
-	return ((value - a.old_min) * (a.new_max - a.new_min) 
-		/ (a.old_max - a.old_min) + a.new_min);
-}
 
 int	ft_strcomp(char *s1, char *s2)
 {
@@ -82,14 +29,46 @@ int	ft_strcomp(char *s1, char *s2)
 		return (0);
 }
 
-void	setup_maps(t_map *x_map, t_map *y_map, t_fractalp *f)
+int	mandelbrot_iter(double cr, double ci)
 {
-	x_map->old_min = 0;
-	x_map->old_max = WIDTH;
-	x_map->new_min = -2.0 * f->zoom_xmin;
-	x_map->new_max = 2.0 * f->zoom_xmax;
-	y_map->old_min = 0;
-	y_map->old_max = HEIGHT;
-	y_map->new_min = -2.0 * f->zoom_ymin;
-	y_map->new_max = 2.0 * f->zoom_ymax;
+	double	zr;
+	double	zi;
+	int		iter;
+	double	temp;
+
+	iter = 0;
+	zr = 0.0;
+	zi = 0.0;
+	while (iter < MAX_ITER && zr * zr + zi * zi < 4.0) 
+	{
+		temp = zr * zr - zi * zi + cr;
+		zi = 2.0 * zr * zi + ci;
+		zr = temp;
+		iter++;
+	}
+	return (iter);
+}
+
+void	handle_franmej(t_fractalj *f, double x_step, double y_step)
+{
+	f->zoom_xmin += x_step * -2;
+	f->zoom_xmax += x_step * 2;
+	f->zoom_ymin += y_step * -2;
+	f->zoom_ymax += y_step * 2;
+}
+
+void	handle_franmem(t_fractal *f, double x_step, double y_step)
+{
+	f->zoom_xmin += x_step * -2;
+	f->zoom_xmax += x_step * 2;
+	f->zoom_ymin += y_step * -2;
+	f->zoom_ymax += y_step * 2;
+}
+
+void	handle_franmep(t_fractalp *f, double x_step, double y_step)
+{
+	f->zoom_xmin += x_step * -2;
+	f->zoom_xmax += x_step * 2;
+	f->zoom_ymin += y_step * -2;
+	f->zoom_ymax += y_step * 2;
 }

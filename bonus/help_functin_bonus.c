@@ -6,7 +6,7 @@
 /*   By: czghoumi <czghoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:44:54 by czghoumi          #+#    #+#             */
-/*   Updated: 2025/05/05 19:26:04 by czghoumi         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:00:41 by czghoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,26 +89,18 @@ double	ft_atoif(char *str)
 	return (sign * result / f);
 }
 
-void	on_scroll(double xdelta, double ydelta, void *param)
+int	julia_iter(double zr, double zi, double cr, double ci)
 {
-	t_fractalp	*f;
+	int		iter;
+	double	temp;
 
-	f = (t_fractalp *)param;
-	mlx_get_mouse_pos(f->window, &f->x_pos, &f->y_pos);
-	(void)xdelta;
-	if (ydelta > 0)
+	iter = 0;
+	while (iter < MAX_ITER && zr * zr + zi * zi < 4.0) 
 	{
-		f->zoom_xmax = f->zoom_xmax * 1.1;
-		f->zoom_xmin = f->zoom_xmin * 1.1;
-		f->zoom_ymax = f->zoom_ymax * 1.1;
-		f->zoom_ymin = f->zoom_ymin * 1.1;
+		temp = zr * zr - zi * zi + cr;
+		zi = 2.0 * zr * zi + ci;
+		zr = temp;
+		iter++;
 	}
-	else if (ydelta < 0)
-	{
-		f->zoom_xmax = f->zoom_xmax / 1.1;
-		f->zoom_xmin = f->zoom_xmin / 1.1;
-		f->zoom_ymax = f->zoom_ymax / 1.1;
-		f->zoom_ymin = f->zoom_ymin / 1.1;
-	}
-	phoenix(f);
+	return (iter);
 }

@@ -5,7 +5,7 @@ MLX = MLX42/build/libmlx42.a -Iinclude -lglfw -L"/Users/czghoumi/.brew/Cellar/gl
 SRCS = mand/main.c mand/mandelbrot.c mand/julia.c mand/help_function.c
 OBJS = $(SRCS:.c=.o)
 
-SRCS_B = bonus/main_bonus.c bonus/help_functin_bonus.c bonus/help_function_for_bonus.c
+SRCS_B = bonus/main_bonus.c bonus/help_functin_bonus.c bonus/help_function_for_bonus.c bonus/mandelbrot_bonus.c bonus/julia_bonus.c bonus/phoenix_bonus.c bonus/main_help_bonus.c bonus/last_bonus.c
 OBJS_B = $(SRCS_B:.c=.o)
 
 HEADER = mand/fractol.h
